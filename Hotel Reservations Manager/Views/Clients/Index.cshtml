@@ -1,0 +1,66 @@
+﻿@model IEnumerable<HotelReservationsManager.Models.Client>
+@{
+    ViewData["Title"] = "Clients";
+}
+
+<h2>Clients</h2>
+
+<form asp-action="Index" method="get" class="mb-3">
+    <div class="form-group">
+        <label>Filter by name:</label>
+        <input name="filter" value="@ViewBag.Filter" class="form-control d-inline-block w-auto" />
+        <label>Items per page:</label>
+        <select name="pageSize" class="form-control d-inline-block w-auto" onchange="this.form.submit()">
+            @foreach (var size in ViewBag.PageSizeOptions)
+            {
+                <option value="@size" selected="@(size == ViewBag.PageSize)">@size</option>
+            }
+        </select>
+        <button type="submit" class="btn btn-primary">Search</button>
+    </div>
+</form>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Phone</th>
+            <th>Email</th>
+            <th>Adult</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model)
+        {
+            <tr>
+                <td>@client.FirstName</td>
+                <td>@client.LastName</td>
+                <td>@client.PhoneNumber</td>
+                <td>@client.Email</td>
+                <td>@client.IsAdult</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@client.Id" class="btn btn-sm btn-info">Details</a>
+                    <a asp-action="Edit" asp-route-id="@client.Id" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@client.Id" class="btn btn-sm btn-danger">Delete</a>
+                    <a asp-action="Reservations" asp-route-id="@client.Id" class="btn btn-sm btn-primary">Reservations</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Create" class="btn btn-success">Create New</a>
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-action="Index" asp-route-page="@i" asp-route-pageSize="@ViewBag.PageSize" asp-route-filter="@ViewBag.Filter">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+</div>

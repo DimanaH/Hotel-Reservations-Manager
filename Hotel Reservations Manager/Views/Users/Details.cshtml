@@ -1,0 +1,35 @@
+﻿@model HotelReservationsManager.Models.ApplicationUser
+@{
+    ViewData["Title"] = "User Details";
+}
+
+<h2>User Details</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Username</dt>
+        <dd class="col-sm-10">@Model.UserName</dd>
+        <dt class="col-sm-2">First Name</dt>
+        <dd class="col-sm-10">@Model.FirstName</dd>
+        <dt class="col-sm-2">Middle Name</dt>
+        <dd class="col-sm-10">@Model.MiddleName</dd>
+        <dt class="col-sm-2">Last Name</dt>
+        <dd class="col-sm-10">@Model.LastName</dd>
+        <dt class="col-sm-2">EGN</dt>
+        <dd class="col-sm-10">@Model.EGN</dd>
+        <dt class="col-sm-2">Phone Number</dt>
+        <dd class="col-sm-10">@Model.PhoneNumber</dd>
+        <dt class="col-sm-2">Email</dt>
+        <dd class="col-sm-10">@Model.Email</dd>
+        <dt class="col-sm-2">Hire Date</dt>
+        <dd class="col-sm-10">@Model.HireDate.ToShortDateString()</dd>
+        <dt class="col-sm-2">Active</dt>
+        <dd class="col-sm-10">@Model.IsActive</dd>
+        <dt class="col-sm-2">Release Date</dt>
+        <dd class="col-sm-10">@(Model.ReleaseDate.HasValue ? Model.ReleaseDate.Value.ToShortDateString() : "N/A")</dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

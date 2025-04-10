@@ -1,0 +1,56 @@
+﻿@model HotelReservationsManager.Models.Reservation
+@{
+    ViewData["Title"] = "Reservation Details";
+}
+
+<h2>Reservation Details</h2>
+
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">Room</dt>
+        <dd class="col-sm-10">
+            @Model.Room.RoomNumber (Type: @Model.Room.Type, Capacity: @Model.Room.Capacity,
+            Adult Price: @Model.Room.AdultPricePerBed, Child Price: @Model.Room.ChildPricePerBed)
+        </dd>
+        <dt class="col-sm-2">User</dt>
+        <dd class="col-sm-10">@Model.User.UserName</dd>
+        <dt class="col-sm-2">Check-In</dt>
+        <dd class="col-sm-10">@Model.CheckInDate.ToShortDateString()</dd>
+        <dt class="col-sm-2">Check-Out</dt>
+        <dd class="col-sm-10">@Model.CheckOutDate.ToShortDateString()</dd>
+        <dt class="col-sm-2">Breakfast</dt>
+        <dd class="col-sm-10">@Model.IncludesBreakfast</dd>
+        <dt class="col-sm-2">All Inclusive</dt>
+        <dd class="col-sm-10">@Model.IsAllInclusive</dd>
+        <dt class="col-sm-2">Total Amount</dt>
+        <dd class="col-sm-10">@Model.TotalAmount</dd>
+    </dl>
+</div>
+
+<h3>Clients</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Email</th>
+            <th>Adult</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in Model.Clients)
+        {
+            <tr>
+                <td>@client.FirstName</td>
+                <td>@client.LastName</td>
+                <td>@client.Email</td>
+                <td>@client.IsAdult</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning">Edit</a>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</div>

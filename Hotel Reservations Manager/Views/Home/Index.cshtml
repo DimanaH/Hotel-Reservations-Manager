@@ -1,0 +1,56 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome to Hotel Reservations Manager</h1>
+    <p>Manage your hotel reservations efficiently.</p>
+
+    <div class="row mt-4">
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Users</h5>
+                    <p class="card-text">Manage hotel staff accounts.</p>
+                    @if (User.IsInRole("Administrator"))
+                    {
+                        <a asp-controller="Users" asp-action="Index" class="btn btn-primary">Go to Users</a>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Clients</h5>
+                    <p class="card-text">View and manage hotel clients.</p>
+                    <a asp-controller="Clients" asp-action="Index" class="btn btn-primary">Go to Clients</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Rooms</h5>
+                    <p class="card-text">Manage hotel rooms.</p>
+                    <a asp-controller="Rooms" asp-action="Index" class="btn btn-primary">Go to Rooms</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Reservations</h5>
+                    <p class="card-text">Create and view reservations.</p>
+                    <a asp-controller="Reservations" asp-action="Index" class="btn btn-primary">Go to Reservations</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .card {
+        margin-bottom: 20px;
+    }
+</style>

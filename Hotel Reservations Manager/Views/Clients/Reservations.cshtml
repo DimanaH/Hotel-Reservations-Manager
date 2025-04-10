@@ -1,0 +1,46 @@
+﻿@model IEnumerable<HotelReservationsManager.Models.Reservation>
+@{
+    ViewData["Title"] = "Reservations for " + ViewBag.Client.FirstName + " " + ViewBag.Client.LastName;
+}
+
+<h2>Reservations for @ViewBag.Client.FirstName @ViewBag.Client.LastName</h2>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Room</th>
+            <th>Check-In</th>
+            <th>Check-Out</th>
+            <th>Total Amount</th>
+            <th>Breakfast</th>
+            <th>All Inclusive</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var reservation in Model)
+        {
+            <tr>
+                <td>@reservation.Room.RoomNumber</td>
+                <td>@reservation.CheckInDate.ToShortDateString()</td>
+                <td>@reservation.CheckOutDate.ToShortDateString()</td>
+                <td>@reservation.TotalAmount</td>
+                <td>@reservation.IncludesBreakfast</td>
+                <td>@reservation.IsAllInclusive</td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<div>
+    <nav>
+        <ul class="pagination">
+            @for (int i = 1; i <= ViewBag.TotalPages; i++)
+            {
+                <li class="page-item @(i == ViewBag.CurrentPage ? "active" : "")">
+                    <a class="page-link" asp-action="Reservations" asp-route-id="@ViewBag.Client.Id" asp-route-page="@i" asp-route-pageSize="@ViewBag.PageSize">@i</a>
+                </li>
+            }
+        </ul>
+    </nav>
+    <a asp-action="Index" class="btn btn-secondary">Back to Clients</a>
+</div>
